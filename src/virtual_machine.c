@@ -1,4 +1,4 @@
-#include "virtual_machine.h"
+#include "garbage_collector.h"
 #include "assert.h"
 
 struct VM *newVM()
@@ -27,10 +27,10 @@ struct Object *newObject(struct VM *vm, object_e type)
 	return object;
 }
 
-void pushInt(struct VM *vm, int intValue)
+void pushInt(struct VM *vm, int value)
 {
 	struct Object *object = newObject(vm, OBJ_INT);
-	object->value = intValue;
+	object->value = value;
 	push(vm, object);
 }
 
