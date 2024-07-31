@@ -26,3 +26,20 @@ object_t *newObject(VM_t *vm, object_e type)
 	object->type = type;
 	return object;
 }
+
+void pushInt(VM_t *vm, int intValue)
+{
+	object_t *object = newObject(vm, OBJ_INT);
+	object->value = intValue;
+	push(vm, object);
+}
+
+object_t *pushPair(VM_t *vm)
+{
+	object_t *object = newObject(vm, OBJ_PAIR);
+	object->tail = pop(vm);
+	object->head = pop(vm);
+
+	push(vm, object);
+	return object;
+}

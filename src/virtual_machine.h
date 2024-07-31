@@ -15,3 +15,7 @@ void push(VM_t *vm, object_t *value);
 object_t *pop(VM_t *vm);
 
 object_t *newObject(VM_t *vm, object_e type);
+
+void pushInt(VM_t *vm, int intValue);
+
+object_t *pushPair(VM_t *vm);
