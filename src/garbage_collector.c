@@ -35,9 +35,18 @@ void sweep(struct VM *vm)
 
 			*object = unreached->next;
 			free(unreached);
+			vm->num_of_obejcts--;
 		} else { // Unmark marked objects
 			(*object)->marked = 0;
 			object = &(*object)->next;
 		}
 	}
+}
+
+void garbage_collector(struct VM *vm)
+{
+	mark_all(vm);
+	sweep(vm);
+
+	vm->max_objects = vm->num_of_obejcts * 2;
 }

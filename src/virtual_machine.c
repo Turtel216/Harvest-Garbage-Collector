@@ -6,12 +6,18 @@ struct VM *newVM()
 	struct VM *vm = malloc(sizeof(struct VM));
 	vm->size = 0;
 	vm->object_head = NULL;
+	vm->num_of_obejcts = 0;
+	vm->max_objects = INITIAL_GC_THRESHOLD;
 
 	return vm;
 }
 
 struct Object *newObject(struct VM *vm, object_e type)
 {
+	// if threashold is reached, garbage collect
+	if (vm->num_of_obejcts == vm->max_objects)
+		garbage_collector(vm);
+
 	struct Object *object = malloc(sizeof(struct Object));
 	object->type = type;
 	object->marked = UNMARKED;
@@ -20,6 +26,7 @@ struct Object *newObject(struct VM *vm, object_e type)
 	object->next = vm->object_head;
 	vm->object_head = object;
 
+	vm->num_of_obejcts++;
 	return object;
 }
 
