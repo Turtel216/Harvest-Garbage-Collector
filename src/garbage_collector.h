@@ -42,5 +42,3 @@ struct Object {
 		};
 	};
 };
-
-void mark_all(struct VM *vm);
