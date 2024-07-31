@@ -58,3 +58,10 @@ struct Object *pushPair(struct VM *vm)
 	push(vm, object);
 	return object;
 }
+
+void free_vm(struct VM *vm)
+{
+	vm->size = 0;
+	garbage_collector(vm);
+	free(vm);
+}

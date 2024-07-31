@@ -6,7 +6,7 @@
 typedef enum { OBJ_INT, OBJ_PAIR } object_e;
 
 #define STACK_MAX 256
-#define INITIAL_GC_THRESHOLD 100
+#define INITIAL_GC_THRESHOLD 8
 
 struct VM {
 	struct Object *stack[STACK_MAX];
@@ -27,6 +27,8 @@ struct Object *newObject(struct VM *vm, object_e type);
 void pushInt(struct VM *vm, int value);
 
 struct Object *pushPair(struct VM *vm);
+
+void free_vm(struct VM *vm);
 
 //
 // Garbage Collector

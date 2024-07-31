@@ -45,8 +45,11 @@ void sweep(struct VM *vm)
 
 void garbage_collector(struct VM *vm)
 {
+	int object_num = vm->num_of_obejcts;
+
 	mark_all(vm);
 	sweep(vm);
 
-	vm->max_objects = vm->num_of_obejcts * 2;
+	vm->max_objects = vm->num_of_obejcts == 0 ? INITIAL_GC_THRESHOLD :
+						    vm->num_of_obejcts * 2;
 }
