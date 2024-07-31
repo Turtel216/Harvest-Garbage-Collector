@@ -3,19 +3,19 @@
 
 #define STACK_MAX 256
 
-typedef struct {
-	object_t *stack[STACK_MAX];
+struct VM {
+	struct Object *stack[STACK_MAX];
 	size_t size;
-} VM_t;
+};
 
-VM_t *newVM();
+struct VM *newVM(void);
 
-void push(VM_t *vm, object_t *value);
+void push(struct VM *vm, struct Object *value);
 
-object_t *pop(VM_t *vm);
+struct Object *pop(struct VM *vm);
 
-object_t *newObject(VM_t *vm, object_e type);
+struct Object *newObject(struct VM *vm, object_e type);
 
-void pushInt(VM_t *vm, int intValue);
+void pushInt(struct VM *vm, int intValue);
 
-object_t *pushPair(VM_t *vm);
+struct Object *pushPair(struct VM *vm);

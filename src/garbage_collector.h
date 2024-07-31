@@ -1,6 +1,6 @@
 typedef enum { OBJ_INT, OBJ_PAIR } object_e;
 
-typedef struct sObject {
+struct Object {
 	object_e type;
 
 	union {
@@ -9,8 +9,8 @@ typedef struct sObject {
 
 		/* OBJ_PAIR */
 		struct {
-			struct sObject *head;
-			struct sObject *tail;
+			struct Object *head;
+			struct Object *tail;
 		};
 	};
-} object_t;
+};
