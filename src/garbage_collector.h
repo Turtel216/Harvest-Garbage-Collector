@@ -9,6 +9,7 @@ typedef enum { OBJ_INT, OBJ_PAIR } object_e;
 
 struct VM {
 	struct Object *stack[STACK_MAX];
+	struct Object *object_head;
 	size_t size;
 };
 
@@ -27,9 +28,15 @@ struct Object *pushPair(struct VM *vm);
 //
 // Garbage Collector
 //
+
+#define UNMARKED 0
+#define MARKED 1
+
 struct Object {
 	unsigned char marked;
 	object_e type;
+
+	struct Object *next;
 
 	union {
 		/* OBJ_INT */

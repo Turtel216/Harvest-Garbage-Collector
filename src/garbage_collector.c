@@ -7,7 +7,7 @@ void mark(struct Object *object)
 		return;
 
 	// Mark as marked
-	object->marked = 1;
+	object->marked = MARKED;
 
 	// Recursevly mark the objects refrences
 	if (object->type == OBJ_PAIR) {
@@ -18,7 +18,26 @@ void mark(struct Object *object)
 
 void mark_all(struct VM *vm)
 {
+	// iterate over the vm stack and mark all objects
 	for (int i = 0; i < vm->size; ++i) {
 		mark(vm->stack[i]);
+	}
+}
+
+void sweep(struct VM *vm)
+{
+	struct Object **object = &vm->object_head;
+	// Itetate over linked list
+	while (*object) {
+		// Free unmarked objects and remove from linked list
+		if (!(*object)->marked) {
+			struct Object *unreached = *object;
+
+			*object = unreached->next;
+			free(unreached);
+		} else { // Unmark marked objects
+			(*object)->marked = 0;
+			object = &(*object)->next;
+		}
 	}
 }
