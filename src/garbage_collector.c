@@ -1,6 +1,6 @@
 #include "garbage_collector.h"
 
-void mark(struct Object *object)
+static void mark(struct Object *object)
 {
 	// Check if object has already been processed
 	if (object->marked)
@@ -16,7 +16,7 @@ void mark(struct Object *object)
 	}
 }
 
-void mark_all(struct VM *vm)
+static void mark_all(struct VM *vm)
 {
 	// iterate over the vm stack and mark all objects
 	for (int i = 0; i < vm->size; ++i) {
@@ -24,7 +24,7 @@ void mark_all(struct VM *vm)
 	}
 }
 
-void sweep(struct VM *vm)
+static void sweep(struct VM *vm)
 {
 	struct Object **object = &vm->object_head;
 	// Itetate over linked list
