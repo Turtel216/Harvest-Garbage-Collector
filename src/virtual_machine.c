@@ -1,4 +1,4 @@
-#include "garbage_collector.h"
+#include "harvest.h"
 #include "assert.h"
 
 struct VM *newVM()
@@ -16,7 +16,7 @@ struct Object *newObject(struct VM *vm, object_e type)
 {
 	// if threashold is reached, garbage collect
 	if (vm->num_of_obejcts == vm->max_objects)
-		garbage_collector(vm);
+		harvest(vm);
 
 	struct Object *object = malloc(sizeof(struct Object));
 	object->type = type;
@@ -62,6 +62,6 @@ struct Object *pushPair(struct VM *vm)
 void free_vm(struct VM *vm)
 {
 	vm->size = 0;
-	garbage_collector(vm);
+	harvest(vm);
 	free(vm);
 }

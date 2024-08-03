@@ -1,4 +1,4 @@
-#include "../src/garbage_collector.h"
+#include "../src/harvest.h"
 #include "assert.h"
 
 int main(void)
@@ -15,7 +15,7 @@ int main(void)
 	a->tail = b;
 	b->tail = a;
 
-	garbage_collector(vm);
+	harvest(vm);
 	assert(vm->num_of_obejcts == 4 && "Should have collected objects.");
 	free_vm(vm);
 }

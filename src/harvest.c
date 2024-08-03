@@ -1,4 +1,4 @@
-#include "garbage_collector.h"
+#include "harvest.h"
 
 static void mark(struct Object *object)
 {
@@ -43,7 +43,7 @@ static void sweep(struct VM *vm)
 	}
 }
 
-void garbage_collector(struct VM *vm)
+void harvest(struct VM *vm)
 {
 	int object_num = vm->num_of_obejcts;
 

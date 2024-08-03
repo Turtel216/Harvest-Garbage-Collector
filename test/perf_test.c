@@ -1,4 +1,4 @@
-#include "../src/garbage_collector.h"
+#include "../src/harvest.h"
 
 int main(void)
 {

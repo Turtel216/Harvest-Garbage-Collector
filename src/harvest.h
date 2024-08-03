@@ -55,4 +55,4 @@ struct Object {
 	};
 };
 
-void garbage_collector(struct VM *vm);
+void harvest(struct VM *vm);
